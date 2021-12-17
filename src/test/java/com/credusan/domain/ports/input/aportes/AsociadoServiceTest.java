@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +33,7 @@ class AsociadoServiceTest {
     AsociadoService service;
     @Autowired
     CaptacionService captacionService;
+
     Asociado asociado;
 
     @BeforeEach
@@ -190,9 +194,11 @@ class AsociadoServiceTest {
 
     @Test
     public void noDebeRetornarRegistros() throws Exception{
-        List<Asociado> asociados = service.getAll();
 
-        assertEquals(0, asociados.size());
+        Pageable page = PageRequest.of(0, 1);
+        Page<Asociado> asociados = service.getAll(page);
+
+        assertEquals(0, asociados.getTotalElements());
     }
 
     @Test
@@ -208,9 +214,11 @@ class AsociadoServiceTest {
         asociado.setNumeroDocumento("5");
         service.create(asociado);
 
-        List<Asociado> asociados = service.getAll();
+        Pageable page = PageRequest.of(0, 5);
 
-        assertEquals(5, asociados.size());
+        Page<Asociado> asociados = service.getAll(page);
+
+        assertEquals(5, asociados.getTotalElements());
     }
 
 

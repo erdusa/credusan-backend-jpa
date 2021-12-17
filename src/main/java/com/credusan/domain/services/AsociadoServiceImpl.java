@@ -5,11 +5,12 @@ import com.credusan.domain.ports.input.aportes.AsociadoService;
 import com.credusan.domain.ports.output.aportes.AsociadoPersistence;
 import com.credusan.domain.ports.output.aportes.CaptacionPersistence;
 import lombok.NonNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class AsociadoServiceImpl implements AsociadoService {
@@ -44,7 +45,7 @@ public class AsociadoServiceImpl implements AsociadoService {
         return asociadoCreado;
     }
 
-    private void crearCaptacion(Asociado asociado) throws Exception{
+    private void crearCaptacion(Asociado asociado) throws Exception {
         Integer numeroCuenta = captacionPersistence.getMaxNumeroCuentaByTipoCaptacion(EnumTipoCaptacion.APORTES.id);
         numeroCuenta = (numeroCuenta == null ? 0 : numeroCuenta) + 1;
 
@@ -78,8 +79,8 @@ public class AsociadoServiceImpl implements AsociadoService {
     }
 
     @Override
-    public List<Asociado> getAll() throws Exception {
-        return persistence.getAll();
+    public Page<Asociado> getAll(Pageable page) throws Exception {
+        return persistence.getAll(page);
     }
 
     @Override

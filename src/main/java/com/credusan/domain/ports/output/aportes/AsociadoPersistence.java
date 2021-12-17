@@ -1,8 +1,8 @@
 package com.credusan.domain.ports.output.aportes;
 
 import com.credusan.domain.models.aportes.Asociado;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface AsociadoPersistence {
 
@@ -12,5 +12,5 @@ public interface AsociadoPersistence {
 
     Asociado getById(Integer idAsociado) throws Exception;
 
-    List<Asociado> getAll() throws Exception;
+    Page<Asociado> getAll(Pageable page) throws Exception;
 }

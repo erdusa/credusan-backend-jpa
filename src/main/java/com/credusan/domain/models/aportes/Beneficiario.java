@@ -37,7 +37,7 @@ public class Beneficiario {
     }
 
     public String getNombreCompleto() {
-        return (this.nombres + ' ' +this.primerApellido + ' '+ Objects.toString(this.segundoApellido, "")).trim();
+        return (this.nombres + ' ' + this.primerApellido + ' ' + Objects.toString(this.segundoApellido, "")).trim();
     }
 
     @Override

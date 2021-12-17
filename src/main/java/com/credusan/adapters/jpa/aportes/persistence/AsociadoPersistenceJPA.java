@@ -4,11 +4,9 @@ import com.credusan.adapters.jpa.aportes.daos.AsociadoRepository;
 import com.credusan.adapters.jpa.aportes.entities.AsociadoEntity;
 import com.credusan.domain.models.aportes.Asociado;
 import com.credusan.domain.ports.output.aportes.AsociadoPersistence;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class AsociadoPersistenceJPA implements AsociadoPersistence {
@@ -35,7 +33,7 @@ public class AsociadoPersistenceJPA implements AsociadoPersistence {
     }
 
     @Override
-    public List<Asociado> getAll() throws Exception {
-        return repo.findAll().stream().map(AsociadoEntity::toAsociado).collect(Collectors.toList());
+    public Page<Asociado> getAll(Pageable page) throws Exception {
+        return repo.findAll(page).map(AsociadoEntity::toAsociado);
     }
 }

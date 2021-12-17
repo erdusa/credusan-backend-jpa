@@ -2,12 +2,13 @@ package com.credusan.adapters.controllers.aportes;
 
 import com.credusan.domain.models.aportes.Asociado;
 import com.credusan.domain.ports.input.aportes.AsociadoService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/asociados")
@@ -32,8 +33,8 @@ public class AsociadoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Asociado>> findAll() throws Exception {
-        List<Asociado> lista = service.getAll();
+    public ResponseEntity<Page<Asociado>> findAll(Pageable page) throws Exception {
+        Page<Asociado> lista = service.getAll(page);
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
