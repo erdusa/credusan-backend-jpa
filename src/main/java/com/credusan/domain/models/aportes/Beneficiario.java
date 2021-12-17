@@ -3,6 +3,8 @@ package com.credusan.domain.models.aportes;
 import com.credusan.utils.StringUtils;
 import lombok.Data;
 
+import java.util.Objects;
+
 @Data
 public class Beneficiario {
     private Integer idBeneficiario;
@@ -32,6 +34,10 @@ public class Beneficiario {
 
     public void setSegundoApellido(String segundoApellido) {
         this.segundoApellido = StringUtils.toUpperCase(segundoApellido);
+    }
+
+    public String getNombreCompleto() {
+        return (this.nombres + ' ' +this.primerApellido + ' '+ Objects.toString(this.segundoApellido, "")).trim();
     }
 
     @Override

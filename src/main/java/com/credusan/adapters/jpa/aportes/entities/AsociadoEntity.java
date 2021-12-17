@@ -36,7 +36,7 @@ public class AsociadoEntity {
     private String segundoApellido;
     @Column(name = "asocfechanacimiento", nullable = false)
     private LocalDate fechaNacimiento;
-    @OneToMany(mappedBy = "asociadoEntity", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(mappedBy = "asociadoEntity", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     @ToString.Exclude
     private List<BeneficiarioEntity> beneficiarioEntities;
 

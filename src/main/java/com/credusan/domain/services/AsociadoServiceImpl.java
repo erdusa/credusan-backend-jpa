@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class AsociadoServiceImpl implements AsociadoService {
@@ -31,7 +30,7 @@ public class AsociadoServiceImpl implements AsociadoService {
             throw new Exception("El identificador del asociado no debe tener valor");
         }
 
-        if (!esPorcentajeBeneficiariosCorrecto(asociado)) {
+        if (esPorcentajeBeneficiariosErrado(asociado)) {
             throw new Exception("Los porcentajes asignados a los beneficiarios deben sumar 100");
         }
         if (asociado.getBeneficiarios() != null) {
@@ -67,7 +66,7 @@ public class AsociadoServiceImpl implements AsociadoService {
             throw new Exception("No existe el asociado con id = " + idAsociado);
         }
 
-        if (!esPorcentajeBeneficiariosCorrecto(asociado)) {
+        if (esPorcentajeBeneficiariosErrado(asociado)) {
             throw new Exception("Los porcentajes asignados a los beneficiarios deben sumar 100");
         }
 
@@ -108,14 +107,14 @@ public class AsociadoServiceImpl implements AsociadoService {
         return asociado.getIdAsociado() != null;
     }
 
-    private boolean esPorcentajeBeneficiariosCorrecto(@NonNull Asociado asociado) {
+    private boolean esPorcentajeBeneficiariosErrado(@NonNull Asociado asociado) {
         if (asociado.getBeneficiarios() == null || asociado.getBeneficiarios().size() == 0) {
-            return true;
+            return false;
         }
         int totalPorcentaje = asociado.getBeneficiarios().stream()
                 .mapToInt(Beneficiario::getPorcentaje)
                 .sum();
 
-        return (totalPorcentaje == 100);
+        return (totalPorcentaje != 100);
     }
 }
