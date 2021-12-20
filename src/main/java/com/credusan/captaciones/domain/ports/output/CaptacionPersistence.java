@@ -10,7 +10,7 @@ public interface CaptacionPersistence {
 
     Integer getMaxNumeroCuentaByTipoCaptacion(Integer IdTipoCaptacion) throws Exception;
 
-    List<Captacion> getAllByIdAsociado(Integer idAsociado);
+    List<Captacion> getAllByIdAsociado(Integer idAsociado) throws Exception;
 
-    Captacion getById(Integer idCaptacion);
+    Captacion getById(Integer idCaptacion) throws Exception;
 }

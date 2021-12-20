@@ -1,7 +1,7 @@
 package com.credusan.asociados.adapters.controllers;
 
 import com.credusan.asociados.domain.models.TipoDocumento;
-import com.credusan.asociados.domain.ports.input.TipoDocumentoService;
+import com.credusan.asociados.domain.services.TipoDocumentoFinderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tiposdocumento")
-public class TipoDocumentoController {
+public class TipoDocumentoGetController {
 
-    TipoDocumentoService service;
+    TipoDocumentoFinderService service;
 
-    public TipoDocumentoController(TipoDocumentoService service) {
+    public TipoDocumentoGetController(TipoDocumentoFinderService service) {
         this.service = service;
     }
 
