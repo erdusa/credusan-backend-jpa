@@ -1,10 +1,12 @@
 package com.credusan.domain.ports.input.aportes;
 
 import com.credusan.TestConfig;
-import com.credusan.domain.models.aportes.Asociado;
-import com.credusan.domain.models.aportes.Beneficiario;
-import com.credusan.domain.models.aportes.Captacion;
-import com.credusan.domain.models.aportes.TipoDocumento;
+import com.credusan.asociados.domain.models.Asociado;
+import com.credusan.asociados.domain.models.Beneficiario;
+import com.credusan.asociados.domain.ports.input.AsociadoService;
+import com.credusan.captaciones.domain.ports.input.CaptacionService;
+import com.credusan.captaciones.domain.models.Captacion;
+import com.credusan.asociados.domain.models.TipoDocumento;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,13 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,7 +39,7 @@ class AsociadoServiceTest {
     @BeforeEach
     void setUp() throws Exception {
         DataSource dataSource = new DriverManagerDataSource("jdbc:h2:mem:testdb", "sa", "password");
-        ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("sql-scripts/test-data.sql"));
+        ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("sql-scripts/test-data-asociado.sql"));
 
         asociado = new Asociado(
                 new TipoDocumento(3),
@@ -57,7 +57,7 @@ class AsociadoServiceTest {
 
     /////Test para create
     @Test
-    public void debeCrearAsociadoSinBeneficiarios() throws Exception {
+    public void deberiaCrearAsociadoSinBeneficiarios() throws Exception {
         Asociado asociadoActual = service.create(asociado);
         assertNotNull(asociadoActual.getIdAsociado());
 
@@ -66,7 +66,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void debeCrearAsociadoSiPorcentajeBeneficiariosIgualA100() throws Exception {
+    public void deberiaCrearAsociadoSiPorcentajeBeneficiariosIgualA100() throws Exception {
         asociado.setBeneficiarios(new ArrayList<>());
         asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 100));
 
@@ -78,7 +78,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void noDebeCrearAsociadoSiIdAsociadoTieneValorAsignado() throws Exception {
+    public void noDeberiaCrearAsociadoSiIdAsociadoTieneValorAsignado() throws Exception {
 
         asociado.setIdAsociado(1);
 
@@ -89,7 +89,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void noDebeCrearAsociadoSiPorcentajeBeneficiariosDiferenteDe100() throws Exception {
+    public void noDeberiaCrearAsociadoSiPorcentajeBeneficiariosDiferenteDe100() throws Exception {
         asociado.setBeneficiarios(new ArrayList<>());
         asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 50));
 
@@ -100,7 +100,7 @@ class AsociadoServiceTest {
     }
     /////Test para update
     @Test
-    public void debeActualizarAsociadoSiPorcentajeBeneficiariosIgualA100() throws Exception {
+    public void deberiaActualizarAsociadoSiPorcentajeBeneficiariosIgualA100() throws Exception {
         asociado.setBeneficiarios(new ArrayList<>());
         asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 100));
 
@@ -123,7 +123,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void noDebeActualizarAsociadoSiPorcentajeBeneficiariosDiferenteDe100() throws Exception {
+    public void noDeberiaActualizarAsociadoSiPorcentajeBeneficiariosDiferenteDe100() throws Exception {
         Asociado asociadoCreado = service.create(asociado);
 
         Asociado asociadoU = new Asociado();
@@ -139,7 +139,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void noDebeActualizarAsociadoSiNoExiste() throws Exception {
+    public void noDeberiaActualizarAsociadoSiNoExiste() throws Exception {
         asociado.setIdAsociado(1);
         Exception thrown = assertThrows(Exception.class, () -> service.update(asociado.getIdAsociado(), asociado));
 
@@ -147,7 +147,7 @@ class AsociadoServiceTest {
      }
 
     @Test
-    public void debeActualizarDeTenerANoTenerBeneficiarios() throws Exception {
+    public void deberiaActualizarDeTenerANoTenerBeneficiarios() throws Exception {
         asociado.setBeneficiarios(new ArrayList<>());
         asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 100));
 
@@ -169,7 +169,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void debeActualizarDeNoTenerATenerBeneficiarios() throws Exception {
+    public void deberiaActualizarDeNoTenerATenerBeneficiarios() throws Exception {
 
         Asociado asociadoCreado = service.create(asociado);
 
@@ -193,7 +193,7 @@ class AsociadoServiceTest {
     //////// Test para getAll
 
     @Test
-    public void noDebeRetornarRegistros() throws Exception{
+    public void noDeberiaRetornarRegistros() throws Exception{
 
         Pageable page = PageRequest.of(0, 1);
         Page<Asociado> asociados = service.getAll(page);
@@ -202,7 +202,7 @@ class AsociadoServiceTest {
     }
 
     @Test
-    public void debeRetornarCincoRegistros() throws Exception{
+    public void deberiaRetornarCincoRegistros() throws Exception{
         asociado.setNumeroDocumento("1");
         service.create(asociado);
         asociado.setNumeroDocumento("2");
@@ -219,6 +219,51 @@ class AsociadoServiceTest {
         Page<Asociado> asociados = service.getAll(page);
 
         assertEquals(5, asociados.getTotalElements());
+    }
+
+    //////// Test para getAllByNames
+
+    @Test
+    public void noDeberiaRetornarRegistrosPorNombre() throws Exception{
+
+        List<Asociado> asociados = service.getAllByNames("");
+
+        assertEquals(0, asociados.size());
+    }
+
+    @Test
+    public void deberiaRetornarRegistrosPorNombres() throws Exception{
+        asociado.setNumeroDocumento("1");
+        asociado.setNombres("pedro maria");
+        asociado.setPrimerApellido("pascasio");
+        asociado.setSegundoApellido("perez");
+        service.create(asociado);
+        asociado.setNumeroDocumento("2");
+        asociado.setNombres("martin maria");
+        asociado.setPrimerApellido("ascanio");
+        asociado.setSegundoApellido("perez");
+        service.create(asociado);
+
+        asociado.setNumeroDocumento("3");
+        asociado.setNombres("lucy maria");
+        asociado.setPrimerApellido("ascanio");
+        asociado.setSegundoApellido(null);
+        service.create(asociado);
+
+        asociado.setNumeroDocumento("4");
+        asociado.setNombres("maria");
+        asociado.setPrimerApellido("rodriguez");
+        asociado.setSegundoApellido("ascanio");
+        service.create(asociado);
+
+        assertEquals(4, service.getAll(PageRequest.of(0, 1)).getTotalElements());
+        assertEquals(1, service.getAllByNames("pedro").size());
+        assertEquals(2, service.getAllByNames("perez").size());
+        assertEquals(3, service.getAllByNames("ascanio").size());
+        assertEquals(4, service.getAllByNames("maria").size());
+        assertEquals(1, service.getAllByNames("pedro pascasio").size());
+        assertEquals(1, service.getAllByNames("maria rodriguez ascanio").size());
+        assertEquals(1, service.getAllByNames("lucy maria ascanio").size());
     }
 
 
