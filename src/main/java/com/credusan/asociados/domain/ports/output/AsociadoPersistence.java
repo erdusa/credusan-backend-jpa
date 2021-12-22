@@ -14,5 +14,5 @@ public interface AsociadoPersistence {
 
     Page<Asociado> getAll(Pageable page) throws Exception;
 
-    List<Asociado> getAllByNames(String nombres) throws Exception;
+    List<Asociado> getAllByNameOrSurnames(String nombres) throws Exception;
 }

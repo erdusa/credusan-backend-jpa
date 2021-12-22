@@ -77,7 +77,7 @@ class AsociadoFinderServiceTest {
     @Test
     public void noDeberiaRetornarRegistrosPorNombre() throws Exception {
 
-        List<Asociado> asociados = asociadoFinderService.getAllByNames("");
+        List<Asociado> asociados = asociadoFinderService.getAllByNameOrSurnames("");
 
         assertEquals(0, asociados.size());
     }
@@ -108,13 +108,13 @@ class AsociadoFinderServiceTest {
         asociadoCreatorService.create(asociado);
 
         assertEquals(4, asociadoFinderService.getAll(PageRequest.of(0, 1)).getTotalElements());
-        assertEquals(1, asociadoFinderService.getAllByNames("pedro").size());
-        assertEquals(2, asociadoFinderService.getAllByNames("perez").size());
-        assertEquals(3, asociadoFinderService.getAllByNames("ascanio").size());
-        assertEquals(4, asociadoFinderService.getAllByNames("maria").size());
-        assertEquals(1, asociadoFinderService.getAllByNames("pedro pascasio").size());
-        assertEquals(1, asociadoFinderService.getAllByNames("maria rodriguez ascanio").size());
-        assertEquals(1, asociadoFinderService.getAllByNames("lucy maria ascanio").size());
+        assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("pedro").size());
+        assertEquals(2, asociadoFinderService.getAllByNameOrSurnames("perez").size());
+        assertEquals(3, asociadoFinderService.getAllByNameOrSurnames("ascanio").size());
+        assertEquals(4, asociadoFinderService.getAllByNameOrSurnames("maria").size());
+        assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("pedro pascasio").size());
+        assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("maria rodriguez ascanio").size());
+        assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("lucy maria ascanio").size());
     }
 
 }

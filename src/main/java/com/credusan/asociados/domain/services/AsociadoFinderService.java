@@ -26,8 +26,8 @@ public class AsociadoFinderService {
         return persistence.getById(idAsociado);
     }
 
-    public List<Asociado> getAllByNames(String nombres) throws Exception {
-        return persistence.getAllByNames(nombres);
+    public List<Asociado> getAllByNameOrSurnames(String nombres) throws Exception {
+        return persistence.getAllByNameOrSurnames(nombres);
     }
 
 }

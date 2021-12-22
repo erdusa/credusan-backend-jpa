@@ -36,7 +36,7 @@ public class AsociadoPersistenceJPA implements AsociadoPersistence {
     }
 
     @Override
-    public List<Asociado> getAllByNames(String nombres) throws Exception {
+    public List<Asociado> getAllByNameOrSurnames(String nombres) throws Exception {
         return repo.findAllByNames(nombres)
                 .stream()
                 .map(AsociadoEntity::toAsociado)
