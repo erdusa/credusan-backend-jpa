@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestConfig
 class AsociadoFinderServiceTest {
@@ -47,9 +48,8 @@ class AsociadoFinderServiceTest {
     public void noDeberiaRetornarRegistros() throws Exception {
 
         Pageable page = PageRequest.of(0, 1);
-        Page<Asociado> asociados = asociadoFinderService.getAll(page);
 
-        assertEquals(0, asociados.getTotalElements());
+        assertEquals(0, asociadoFinderService.getAll(page).getTotalElements());
     }
 
     @Test
@@ -67,19 +67,15 @@ class AsociadoFinderServiceTest {
 
         Pageable page = PageRequest.of(0, 5);
 
-        Page<Asociado> asociados = asociadoFinderService.getAll(page);
-
-        assertEquals(5, asociados.getTotalElements());
+        assertEquals(5, asociadoFinderService.getAll(page).getTotalElements());
+        assertTrue(asociadoFinderService.getAll(page).stream().allMatch(Asociado::isActivo));
     }
 
     //////// Test para getAllByNames
 
     @Test
     public void noDeberiaRetornarRegistrosPorNombre() throws Exception {
-
-        List<Asociado> asociados = asociadoFinderService.getAllByNameOrSurnames("");
-
-        assertEquals(0, asociados.size());
+        assertEquals(0, asociadoFinderService.getAllByNameOrSurnames("").size());
     }
 
     @Test
@@ -115,6 +111,7 @@ class AsociadoFinderServiceTest {
         assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("pedro pascasio").size());
         assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("maria rodriguez ascanio").size());
         assertEquals(1, asociadoFinderService.getAllByNameOrSurnames("lucy maria ascanio").size());
+        assertTrue(asociadoFinderService.getAllByNameOrSurnames("maria").stream().allMatch(Asociado::isActivo));
     }
 
 }

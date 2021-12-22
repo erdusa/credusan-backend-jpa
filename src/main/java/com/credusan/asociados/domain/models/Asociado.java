@@ -20,6 +20,7 @@ public class Asociado {
     private String segundoApellido;
     private LocalDate fechaNacimiento;
     private List<Beneficiario> beneficiarios;
+    private boolean activo;
 
     public Asociado(TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String primerApellido, String segundoApellido, LocalDate fechaNacimiento) {
         this.tipoDocumento = tipoDocumento;

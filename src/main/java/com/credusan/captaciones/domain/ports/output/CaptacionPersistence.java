@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface CaptacionPersistence {
 
-    Captacion save(Captacion captacion) throws Exception;
+    Captacion save(Captacion captacion);
 
-    Integer getMaxNumeroCuentaByTipoCaptacion(Integer IdTipoCaptacion) throws Exception;
+    Integer getMaxNumeroCuentaByTipoCaptacion(Integer IdTipoCaptacion);
 
-    List<Captacion> getAllByIdAsociado(Integer idAsociado) throws Exception;
+    List<Captacion> getAllByIdAsociado(Integer idAsociado);
 
-    Captacion getById(Integer idCaptacion) throws Exception;
+    Captacion getById(Integer idCaptacion);
+
+    Captacion getCuentaAportes(Integer idAsociado);
 }

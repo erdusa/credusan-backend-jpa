@@ -3,7 +3,6 @@ package com.credusan.asociados.domain.services;
 import com.credusan.asociados.domain.models.Asociado;
 import com.credusan.asociados.domain.models.Beneficiario;
 import com.credusan.asociados.domain.ports.output.AsociadoPersistence;
-import com.credusan.captaciones.domain.ports.output.CaptacionPersistence;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ public class AsociadoUpdaterService {
 
     private final AsociadoPersistence persistence;
 
-    public AsociadoUpdaterService(AsociadoPersistence asociadoPersistence, CaptacionPersistence captacionPersistence) {
+    public AsociadoUpdaterService(AsociadoPersistence asociadoPersistence) {
         this.persistence = asociadoPersistence;
     }
 

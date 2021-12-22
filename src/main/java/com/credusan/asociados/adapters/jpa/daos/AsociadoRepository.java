@@ -10,7 +10,7 @@ import java.util.List;
 public interface AsociadoRepository extends GenericRepository<AsociadoEntity, Integer> {
 
     @Query(
-            value = "SELECT * FROM asociado WHERE asocnombres||asocprimerApellido||coalesce(asocsegundoApellido,'') ilike REPLACE('%'||:nombres||'%', ' ','%')",
+            value = "SELECT * FROM asociado WHERE asocnombres||asocprimerApellido||coalesce(asocsegundoApellido,'') ilike REPLACE('%'||:nombres||'%', ' ','%') order by asocnombres, asocprimerApellido, asocsegundoApellido",
             nativeQuery = true
     )
     List<AsociadoEntity> findAllByNames(@Param("nombres") String nombres);

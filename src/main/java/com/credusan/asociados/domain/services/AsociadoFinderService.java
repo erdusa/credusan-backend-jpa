@@ -13,21 +13,34 @@ import java.util.List;
 public class AsociadoFinderService {
 
     private final AsociadoPersistence persistence;
+    private final CaptacionPersistence captacionPersistence;
 
     public AsociadoFinderService(AsociadoPersistence asociadoPersistence, CaptacionPersistence captacionPersistence) {
         this.persistence = asociadoPersistence;
+        this.captacionPersistence = captacionPersistence;
     }
 
     public Page<Asociado> getAll(Pageable page) throws Exception {
-        return persistence.getAll(page);
+        Page<Asociado> asociados = persistence.getAll(page);
+
+        asociados.forEach(asociado -> asociado.setActivo(captacionPersistence.getCuentaAportes(asociado.getIdAsociado()) != null));
+
+        return asociados;
     }
 
     public Asociado getById(Integer idAsociado) throws Exception {
-        return persistence.getById(idAsociado);
+        Asociado asociado = persistence.getById(idAsociado);
+        asociado.setActivo(captacionPersistence.getCuentaAportes(asociado.getIdAsociado()) != null);
+        return asociado;
     }
 
     public List<Asociado> getAllByNameOrSurnames(String nombres) throws Exception {
-        return persistence.getAllByNameOrSurnames(nombres);
+        List<Asociado> asociados = persistence.getAllByNameOrSurnames(nombres);
+
+        asociados.forEach(asociado -> asociado.setActivo(captacionPersistence.getCuentaAportes(asociado.getIdAsociado()) != null));
+
+        return asociados;
     }
+
 
 }
