@@ -1,7 +1,7 @@
 package com.credusan.asociados.infraestructura.controladores;
 
-import com.credusan.asociados.dominio.modelos.Asociado;
 import com.credusan.asociados.aplicacion.ServicioConsultarAsociado;
+import com.credusan.asociados.dominio.modelos.Asociado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

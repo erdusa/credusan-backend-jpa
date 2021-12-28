@@ -1,6 +1,6 @@
 package com.credusan.asociados.infraestructura.jpa.daos;
 
-import com.credusan.asociados.infraestructura.jpa.entities.EntidadAsociado;
+import com.credusan.asociados.infraestructura.jpa.entidades.EntidadAsociado;
 import com.credusan.shared.repository.RepositorioGenerico;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,11 +1,11 @@
-package com.credusan.captaciones.infraestructura.jpa.persistence;
+package com.credusan.captaciones.infraestructura.jpa.persistencia;
 
-import com.credusan.captaciones.infraestructura.jpa.daos.RepositorioCaptacion;
-import com.credusan.captaciones.infraestructura.jpa.entities.EntidadCaptacion;
 import com.credusan.captaciones.dominio.enums.EnumTipoCaptacion;
 import com.credusan.captaciones.dominio.enums.EnumTipoEstadoCaptacion;
 import com.credusan.captaciones.dominio.modelos.Captacion;
 import com.credusan.captaciones.dominio.puertos.PersistenciaCaptacion;
+import com.credusan.captaciones.infraestructura.jpa.daos.RepositorioCaptacion;
+import com.credusan.captaciones.infraestructura.jpa.entidades.EntidadCaptacion;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

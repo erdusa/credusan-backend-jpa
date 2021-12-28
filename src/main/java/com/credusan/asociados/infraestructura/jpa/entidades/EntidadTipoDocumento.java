@@ -1,4 +1,4 @@
-package com.credusan.asociados.infraestructura.jpa.entities;
+package com.credusan.asociados.infraestructura.jpa.entidades;
 
 import com.credusan.asociados.dominio.modelos.TipoDocumento;
 import lombok.Getter;

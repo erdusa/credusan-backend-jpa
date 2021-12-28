@@ -1,9 +1,9 @@
-package com.credusan.asociados.infraestructura.jpa.persistence;
+package com.credusan.asociados.infraestructura.jpa.persistencia;
 
-import com.credusan.asociados.infraestructura.jpa.daos.RepositorioAsociado;
-import com.credusan.asociados.infraestructura.jpa.entities.EntidadAsociado;
 import com.credusan.asociados.dominio.modelos.Asociado;
 import com.credusan.asociados.dominio.puertos.PersistenciaAsociado;
+import com.credusan.asociados.infraestructura.jpa.daos.RepositorioAsociado;
+import com.credusan.asociados.infraestructura.jpa.entidades.EntidadAsociado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;

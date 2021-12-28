@@ -1,4 +1,4 @@
-package com.credusan.captaciones.infraestructura.jpa.entities;
+package com.credusan.captaciones.infraestructura.jpa.entidades;
 
 import com.credusan.captaciones.dominio.modelos.TipoCaptacion;
 import lombok.Getter;

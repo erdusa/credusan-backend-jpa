@@ -1,9 +1,9 @@
-package com.credusan.asociados.infraestructura.jpa.persistence;
+package com.credusan.asociados.infraestructura.jpa.persistencia;
 
-import com.credusan.asociados.infraestructura.jpa.daos.RepositorioTipoDocumento;
-import com.credusan.asociados.infraestructura.jpa.entities.EntidadTipoDocumento;
 import com.credusan.asociados.dominio.modelos.TipoDocumento;
 import com.credusan.asociados.dominio.puertos.TipoDocumentoPersistence;
+import com.credusan.asociados.infraestructura.jpa.daos.RepositorioTipoDocumento;
+import com.credusan.asociados.infraestructura.jpa.entidades.EntidadTipoDocumento;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

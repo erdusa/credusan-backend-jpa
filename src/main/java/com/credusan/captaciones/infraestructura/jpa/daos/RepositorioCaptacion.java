@@ -1,6 +1,6 @@
 package com.credusan.captaciones.infraestructura.jpa.daos;
 
-import com.credusan.captaciones.infraestructura.jpa.entities.EntidadCaptacion;
+import com.credusan.captaciones.infraestructura.jpa.entidades.EntidadCaptacion;
 import com.credusan.shared.repository.RepositorioGenerico;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +11,7 @@ public interface RepositorioCaptacion extends RepositorioGenerico<EntidadCaptaci
     @Query(value = "SELECT MAX(c.captNumeroCuenta) FROM captacion c WHERE c.tipcapid = :idTipoCaptacion", nativeQuery = true)
     Integer findMaxNumeroCuentaByTipoCaptacion(@Param("idTipoCaptacion") Integer idTipoCaptacion);
 
-    @Query(value = "FROM #{#entityName} c WHERE c.asociadoEntity.idAsociado = :idAsociado")
+    //@Query(value = "FROM #{#entityName} c WHERE c.asociadoEntity.idAsociado = :idAsociado")
+    @Query(value = "select * FROM captacion c WHERE c.asocid = :idAsociado", nativeQuery = true)
     List<EntidadCaptacion> findAllByIdAsociado(@Param("idAsociado") Integer idAsociado);
 }

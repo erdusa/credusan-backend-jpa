@@ -32,6 +32,7 @@ class ServicioCrearCaptacionTest {
 
     Asociado asociado;
     Captacion captacion;
+    Asociado asociadoCreado;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -45,6 +46,7 @@ class ServicioCrearCaptacionTest {
                 "pascasio",
                 "perez",
                 LocalDate.of(2000, 10, 5));
+        asociadoCreado = servicioCrearAsociado.create(asociado);
 
         captacion = new Captacion(
                 new TipoCaptacion(EnumTipoCaptacion.AHORROS.id),
@@ -57,9 +59,7 @@ class ServicioCrearCaptacionTest {
     }
 
     @Test
-    void noDeberiaCrearAportesSiTieneUnaActiva() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-
+    void noDeberiaCrearAportesSiTieneUnaActiva() {
         captacion.setAsociado(asociadoCreado);
         captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.APORTES.id));
 
@@ -69,9 +69,7 @@ class ServicioCrearCaptacionTest {
     }
 
     @Test
-    void noDeberiaCrearCaptacionSiIdCaptacionTieneValorAsignado() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-
+    void noDeberiaCrearCaptacionSiIdCaptacionTieneValorAsignado() {
         captacion.setIdCaptacion(1);
 
         Exception thrown = assertThrows(Exception.class, () -> servicioCrearCaptacion.create(captacion));
@@ -82,7 +80,6 @@ class ServicioCrearCaptacionTest {
     @Test
     void deberiaCrearCaptacion() throws Exception {
 
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
         captacion.setAsociado(asociadoCreado);
         captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.AHORROS.id));
         Captacion captacionCreada = servicioCrearCaptacion.create(captacion);

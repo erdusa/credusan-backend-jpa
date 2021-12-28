@@ -1,7 +1,7 @@
 package com.credusan.asociados.infraestructura.controladores;
 
-import com.credusan.asociados.dominio.modelos.TipoDocumento;
 import com.credusan.asociados.aplicacion.ServicioConsultarTipoDocumento;
+import com.credusan.asociados.dominio.modelos.TipoDocumento;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

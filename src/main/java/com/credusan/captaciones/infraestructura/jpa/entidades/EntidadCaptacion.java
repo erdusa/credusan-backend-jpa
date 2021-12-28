@@ -1,7 +1,7 @@
-package com.credusan.captaciones.infraestructura.jpa.entities;
+package com.credusan.captaciones.infraestructura.jpa.entidades;
 
-import com.credusan.asociados.infraestructura.jpa.entities.EntidadAsociado;
 import com.credusan.asociados.dominio.modelos.Asociado;
+import com.credusan.asociados.infraestructura.jpa.entidades.EntidadAsociado;
 import com.credusan.captaciones.dominio.modelos.Captacion;
 import lombok.Getter;
 import lombok.Setter;

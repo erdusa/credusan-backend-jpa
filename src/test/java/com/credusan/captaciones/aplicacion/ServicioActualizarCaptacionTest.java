@@ -34,6 +34,8 @@ class ServicioActualizarCaptacionTest {
 
     Asociado asociado;
     Captacion captacion;
+    Asociado asociadoCreado;
+    Captacion captacionCreada;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -56,14 +58,14 @@ class ServicioActualizarCaptacionTest {
                 LocalDate.now(),
                 (double) 0
         );
+
+        asociadoCreado = servicioCrearAsociado.create(asociado);
+        captacion.setAsociado(asociadoCreado);
+        captacionCreada = servicioCrearCaptacion.create(captacion);
     }
 
     @Test
     void deberiaActualizarCaptacion() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-        captacion.setAsociado(asociadoCreado);
-
-        Captacion captacionCreada = servicioCrearCaptacion.create(captacion);
 
         captacion.setTipoEstadoCaptacion(new TipoEstadoCaptacion(EnumTipoEstadoCaptacion.SALDADA.id));
         captacion.setSaldo((double) 5000);
@@ -74,12 +76,7 @@ class ServicioActualizarCaptacionTest {
     }
 
     @Test
-    void noDeberiaActualizarCaptacionSiCambiaTipoCaptacion() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-
-        captacion.setAsociado(asociadoCreado);
-        captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.AHORROS.id));
-        Captacion captacionCreada = servicioCrearCaptacion.create(captacion);
+    void noDeberiaActualizarCaptacionSiCambiaTipoCaptacion() {
 
         captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.APORTES.id));
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarCaptacion.update(captacionCreada.getIdCaptacion(), captacion));
@@ -89,13 +86,6 @@ class ServicioActualizarCaptacionTest {
 
     @Test
     void noDeberiaActualizarCaptacionSiCambiaAsociado() throws Exception {
-
-        asociado.setNumeroDocumento("1");
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-
-        captacion.setAsociado(asociadoCreado);
-        captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.AHORROS.id));
-        Captacion captacionCreada = servicioCrearCaptacion.create(captacion);
 
         asociado.setNumeroDocumento("2");
         asociadoCreado = servicioCrearAsociado.create(asociado);
@@ -107,10 +97,7 @@ class ServicioActualizarCaptacionTest {
     }
 
     @Test
-    void noDeberiaActualizarCaptacionSiCambiaNumeroCuenta() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-        captacion.setAsociado(asociadoCreado);
-        Captacion captacionCreada = servicioCrearCaptacion.create(captacion);
+    void noDeberiaActualizarCaptacionSiCambiaNumeroCuenta() {
 
         captacion.setNumeroCuenta(100);
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarCaptacion.update(captacionCreada.getIdCaptacion(), captacion));
@@ -119,10 +106,7 @@ class ServicioActualizarCaptacionTest {
     }
 
     @Test
-    void noDeberiaActualizarCaptacionSiCambiaFechaApertura() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-        captacion.setAsociado(asociadoCreado);
-        Captacion captacionCreada = servicioCrearCaptacion.create(captacion);
+    void noDeberiaActualizarCaptacionSiCambiaFechaApertura() {
 
         captacion.setFechaApertura(LocalDate.of(2000, 1, 1));
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarCaptacion.update(captacionCreada.getIdCaptacion(), captacion));
@@ -131,10 +115,7 @@ class ServicioActualizarCaptacionTest {
     }
 
     @Test
-    void noDeberiaActualizarCaptacionSiSaldoEsNegativo() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-        captacion.setAsociado(asociadoCreado);
-        Captacion captacionCreada = servicioCrearCaptacion.create(captacion);
+    void noDeberiaActualizarCaptacionSiSaldoEsNegativo() {
 
         captacion.setSaldo((double) -100);
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarCaptacion.update(captacionCreada.getIdCaptacion(), captacion));
