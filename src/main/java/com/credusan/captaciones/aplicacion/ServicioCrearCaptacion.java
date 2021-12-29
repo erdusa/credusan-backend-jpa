@@ -27,19 +27,22 @@ public class ServicioCrearCaptacion {
             throw new Exception("El asociado ya tiene una cuenta de aportes activa");
         }
 
+        Integer numeroCuenta = repo.getMaxNumeroCuentaByTipoCaptacion(captacion.getTipoCaptacion().getIdTipoCaptacion());
+
         captacion.setFechaApertura(LocalDate.now());
         captacion.setTipoEstadoCaptacion(new TipoEstadoCaptacion(EnumTipoEstadoCaptacion.ACTIVA.id));
         captacion.setFechaApertura(LocalDate.now());
-        captacion.setNumeroCuenta(repo.getMaxNumeroCuentaByTipoCaptacion(captacion.getTipoCaptacion().getIdTipoCaptacion()));
+        captacion.setNumeroCuenta(numeroCuenta);
         captacion.setSaldo((double) 0);
         return repo.save(captacion);
     }
 
     private boolean verificarSiEsAportesYAsociadoYaTieneUnaActiva(Captacion captacion) {
-        return captacion.getTipoCaptacion().getIdTipoCaptacion().equals(EnumTipoCaptacion.APORTES.id)
-                && repo.getAllByIdAsociado(captacion.getAsociado().getIdAsociado()).stream()
-                .anyMatch(c -> c.getTipoCaptacion().getIdTipoCaptacion().equals(EnumTipoCaptacion.APORTES.id)
-                        && c.getTipoEstadoCaptacion().getIdTipoEstadoCaptacion().equals(EnumTipoEstadoCaptacion.ACTIVA.id));
+        boolean captacionACrearEsAportes = captacion.getTipoCaptacion().getIdTipoCaptacion().equals(EnumTipoCaptacion.APORTES.id);
+
+        boolean tieneCaptacionAportesActiva = repo.getCuentaAportes(captacion.getAsociado().getIdAsociado()) != null;
+
+        return captacionACrearEsAportes && tieneCaptacionAportesActiva;
     }
 
 

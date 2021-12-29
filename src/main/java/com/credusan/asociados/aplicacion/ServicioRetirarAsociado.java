@@ -24,9 +24,9 @@ public class ServicioRetirarAsociado {
 
         cuentaAportes.getTipoEstadoCaptacion().setIdTipoEstadoCaptacion(EnumTipoEstadoCaptacion.SALDADA.id);
 
-        captacionPersistence.save(cuentaAportes);
+        Captacion captacionSaldada = captacionPersistence.save(cuentaAportes);
 
-        return true;
+        return captacionSaldada.getTipoEstadoCaptacion().getIdTipoEstadoCaptacion().equals(EnumTipoEstadoCaptacion.SALDADA.id);
     }
 
 

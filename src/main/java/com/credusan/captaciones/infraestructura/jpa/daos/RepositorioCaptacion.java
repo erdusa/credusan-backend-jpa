@@ -12,6 +12,6 @@ public interface RepositorioCaptacion extends RepositorioGenerico<EntidadCaptaci
     Integer findMaxNumeroCuentaByTipoCaptacion(@Param("idTipoCaptacion") Integer idTipoCaptacion);
 
     //@Query(value = "FROM #{#entityName} c WHERE c.asociadoEntity.idAsociado = :idAsociado")
-    @Query(value = "select * FROM captacion c WHERE c.asocid = :idAsociado", nativeQuery = true)
+    @Query(value = "SELECT * FROM captacion c WHERE c.asocid = :idAsociado ORDER BY tipcapid, captnumerocuenta", nativeQuery = true)
     List<EntidadCaptacion> findAllByIdAsociado(@Param("idAsociado") Integer idAsociado);
 }

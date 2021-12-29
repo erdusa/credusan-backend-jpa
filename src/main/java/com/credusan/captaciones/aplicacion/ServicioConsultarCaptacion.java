@@ -18,4 +18,8 @@ public class ServicioConsultarCaptacion {
     public List<Captacion> getAllByIdAsociado(Integer idAsociado) {
         return repo.getAllByIdAsociado(idAsociado);
     }
+
+    public Captacion getCuentaAportes(Integer idAsociado) {
+        return repo.getCuentaAportes(idAsociado);
+    }
 }

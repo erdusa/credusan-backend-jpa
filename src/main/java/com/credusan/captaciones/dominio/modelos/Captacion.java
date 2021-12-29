@@ -3,12 +3,15 @@ package com.credusan.captaciones.dominio.modelos;
 import com.credusan.asociados.dominio.modelos.Asociado;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 public class Captacion {
+    private final static int TAMANIO_NUMERO_CUENTA_COMPLETO = 5;
+
     private Integer idCaptacion;
     private TipoCaptacion tipoCaptacion;
     private Integer numeroCuenta;
@@ -24,6 +27,11 @@ public class Captacion {
         this.tipoEstadoCaptacion = tipoEstadoCaptacion;
         this.fechaApertura = fechaApertura;
         this.saldo = saldo;
+    }
+
+    public String getNumeroCuentaCompleto() {
+        return this.tipoCaptacion.getIdTipoCaptacion().toString()
+                + StringUtils.leftPad(numeroCuenta.toString(), TAMANIO_NUMERO_CUENTA_COMPLETO, "0");
     }
 
     @Override
