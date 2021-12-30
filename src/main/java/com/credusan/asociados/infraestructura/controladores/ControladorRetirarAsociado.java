@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/asociados/retirar")
 public class ControladorRetirarAsociado {
 
-    private ServicioRetirarAsociado service;
+    private final ServicioRetirarAsociado service;
 
     public ControladorRetirarAsociado(ServicioRetirarAsociado service) {
         this.service = service;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Boolean> update(@PathVariable("id") Integer idAsociado) {
+    public ResponseEntity<Boolean> update(@PathVariable("id") Integer idAsociado) throws Exception {
         Boolean resultado = service.retirarAsociado(idAsociado);
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }

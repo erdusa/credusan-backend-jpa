@@ -6,10 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,15 +15,15 @@ import java.util.List;
 @RequestMapping("/asociados")
 public class ControladorConsultarAsociado {
 
-    private ServicioConsultarAsociado service;
+    private final ServicioConsultarAsociado service;
 
     public ControladorConsultarAsociado(ServicioConsultarAsociado service) {
         this.service = service;
     }
 
     @GetMapping
-    public ResponseEntity<Page<Asociado>> getAll(Pageable page) throws Exception {
-        Page<Asociado> lista = service.getAll(page);
+    public ResponseEntity<Page<Asociado>> getAll(Pageable pageable, @RequestParam("soloActivos") boolean soloActivos) throws Exception {
+        Page<Asociado> lista = service.getAll(pageable, soloActivos);
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 

@@ -40,6 +40,7 @@ public class ServicioCrearAsociado {
             asociado.getBeneficiarios().forEach(beneficiario -> beneficiario.setAsociado(asociado));
         }
 
+        asociado.setActivo(true);
         Asociado asociadoCreado = persistence.save(asociado);
 
         crearCaptacion(asociadoCreado);

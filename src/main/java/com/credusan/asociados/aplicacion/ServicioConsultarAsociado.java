@@ -20,12 +20,8 @@ public class ServicioConsultarAsociado {
         this.captacionPersistence = captacionPersistence;
     }
 
-    public Page<Asociado> getAll(Pageable page) throws Exception {
-        Page<Asociado> asociados = persistence.getAll(page);
-
-        asociados.forEach(asociado -> asociado.setActivo(captacionPersistence.getCuentaAportes(asociado.getIdAsociado()) != null));
-
-        return asociados;
+    public Page<Asociado> getAll(Pageable pageable, boolean soloActivos) throws Exception {
+        return persistence.getAll(pageable, soloActivos);
     }
 
     public Asociado getById(Integer idAsociado) throws Exception {

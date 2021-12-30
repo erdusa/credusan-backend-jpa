@@ -12,7 +12,7 @@ public interface PersistenciaAsociado {
 
     Asociado getById(Integer idAsociado) throws Exception;
 
-    Page<Asociado> getAll(Pageable page) throws Exception;
+    Page<Asociado> getAll(Pageable page, boolean soloActivos) throws Exception;
 
     List<Asociado> getAllByNameOrSurnames(String nombres) throws Exception;
 }

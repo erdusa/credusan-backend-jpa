@@ -4,8 +4,10 @@ import com.credusan.asociados.dominio.modelos.Asociado;
 import com.credusan.asociados.dominio.puertos.PersistenciaAsociado;
 import com.credusan.asociados.infraestructura.jpa.daos.RepositorioAsociado;
 import com.credusan.asociados.infraestructura.jpa.entidades.EntidadAsociado;
+import com.credusan.asociados.infraestructura.jpa.especificaciones.AsociadoEspec;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,8 +33,13 @@ public class PersistenciaAsociadoJPA implements PersistenciaAsociado {
     }
 
     @Override
-    public Page<Asociado> getAll(Pageable page) {
-        return repo.findAll(page).map(EntidadAsociado::toAsociado);
+    public Page<Asociado> getAll(Pageable pageable, boolean soloActivos) {
+
+        Specification<EntidadAsociado> espec = null;
+        if (soloActivos) {
+            espec = AsociadoEspec.esAsociadoActivo();
+        }
+        return repo.findAll(espec, pageable).map(EntidadAsociado::toAsociado);
     }
 
     @Override

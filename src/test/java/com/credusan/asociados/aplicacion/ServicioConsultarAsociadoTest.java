@@ -27,6 +27,8 @@ class ServicioConsultarAsociadoTest {
     ServicioConsultarAsociado servicioConsultarAsociado;
 
     Asociado asociado;
+    boolean soloActivos = true;
+
 
     @BeforeEach
     void setUp() throws Exception {
@@ -47,7 +49,7 @@ class ServicioConsultarAsociadoTest {
 
         Pageable page = PageRequest.of(0, 1);
 
-        assertEquals(0, servicioConsultarAsociado.getAll(page).getTotalElements());
+        assertEquals(0, servicioConsultarAsociado.getAll(page, soloActivos).getTotalElements());
     }
 
     @Test
@@ -65,8 +67,8 @@ class ServicioConsultarAsociadoTest {
 
         Pageable page = PageRequest.of(0, 5);
 
-        assertEquals(5, servicioConsultarAsociado.getAll(page).getTotalElements());
-        assertTrue(servicioConsultarAsociado.getAll(page).stream().allMatch(Asociado::isActivo));
+        assertEquals(5, servicioConsultarAsociado.getAll(page, soloActivos).getTotalElements());
+        assertTrue(servicioConsultarAsociado.getAll(page, soloActivos).stream().allMatch(Asociado::isActivo));
     }
 
     //////// Test para getAllByNames
@@ -83,6 +85,7 @@ class ServicioConsultarAsociadoTest {
         asociado.setPrimerApellido("pascasio");
         asociado.setSegundoApellido("perez");
         servicioCrearAsociado.create(asociado);
+
         asociado.setNumeroDocumento("2");
         asociado.setNombres("martin maria");
         asociado.setPrimerApellido("ascanio");
@@ -101,7 +104,7 @@ class ServicioConsultarAsociadoTest {
         asociado.setSegundoApellido("ascanio");
         servicioCrearAsociado.create(asociado);
 
-        assertEquals(4, servicioConsultarAsociado.getAll(PageRequest.of(0, 1)).getTotalElements());
+        assertEquals(4, servicioConsultarAsociado.getAll(PageRequest.of(0, 1), soloActivos).getTotalElements());
         assertEquals(1, servicioConsultarAsociado.getAllByNameOrSurnames("pedro").size());
         assertEquals(2, servicioConsultarAsociado.getAllByNameOrSurnames("perez").size());
         assertEquals(3, servicioConsultarAsociado.getAllByNameOrSurnames("ascanio").size());
