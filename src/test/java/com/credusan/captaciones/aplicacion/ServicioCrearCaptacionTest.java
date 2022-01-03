@@ -1,9 +1,9 @@
 package com.credusan.captaciones.aplicacion;
 
 import com.credusan.TestConfig;
+import com.credusan.asociados.aplicacion.ServicioCrearAsociado;
 import com.credusan.asociados.dominio.modelos.Asociado;
 import com.credusan.asociados.dominio.modelos.TipoDocumento;
-import com.credusan.asociados.aplicacion.ServicioCrearAsociado;
 import com.credusan.captaciones.dominio.enums.EnumTipoCaptacion;
 import com.credusan.captaciones.dominio.enums.EnumTipoEstadoCaptacion;
 import com.credusan.captaciones.dominio.modelos.Captacion;

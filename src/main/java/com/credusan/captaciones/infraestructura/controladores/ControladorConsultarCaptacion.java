@@ -22,7 +22,7 @@ public class ControladorConsultarCaptacion {
     }
 
     @GetMapping("/{idAsociado}")
-    public ResponseEntity<List<Captacion>> update(@PathVariable("idAsociado") Integer idAsociado) {
+    public ResponseEntity<List<Captacion>> update(@PathVariable("idAsociado") Integer idAsociado) throws Exception {
         List<Captacion> lista = servicio.getAllByIdAsociado(idAsociado);
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }

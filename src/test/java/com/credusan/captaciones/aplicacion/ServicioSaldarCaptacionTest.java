@@ -77,7 +77,7 @@ class ServicioSaldarCaptacionTest {
     }
 
     @Test
-    void noDeberiaSaldarSiEsCuentaAportes() {
+    void noDeberiaSaldarSiEsCuentaAportes() throws Exception {
         Captacion captacionAportes = servicioConsultarCaptacion.getCuentaAportes(asociadoCreado.getIdAsociado());
 
         Exception thrown = assertThrows(Exception.class, () -> servicioSaldarCaptacion.saldar(captacionAportes.getIdCaptacion()));

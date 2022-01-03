@@ -15,11 +15,11 @@ public class ServicioConsultarCaptacion {
         this.repo = repo;
     }
 
-    public List<Captacion> getAllByIdAsociado(Integer idAsociado) {
+    public List<Captacion> getAllByIdAsociado(Integer idAsociado) throws Exception {
         return repo.getAllByIdAsociado(idAsociado);
     }
 
-    public Captacion getCuentaAportes(Integer idAsociado) {
+    public Captacion getCuentaAportes(Integer idAsociado) throws Exception {
         return repo.getCuentaAportes(idAsociado);
     }
 }

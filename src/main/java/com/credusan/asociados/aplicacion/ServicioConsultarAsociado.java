@@ -31,11 +31,7 @@ public class ServicioConsultarAsociado {
     }
 
     public List<Asociado> getAllByNameOrSurnames(String nombres) throws Exception {
-        List<Asociado> asociados = persistence.getAllByNameOrSurnames(nombres);
-
-        asociados.forEach(asociado -> asociado.setActivo(captacionPersistence.getCuentaAportes(asociado.getIdAsociado()) != null));
-
-        return asociados;
+        return persistence.getAllByNameOrSurnames(nombres);
     }
 
 

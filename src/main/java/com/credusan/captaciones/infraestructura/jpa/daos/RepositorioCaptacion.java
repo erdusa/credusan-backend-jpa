@@ -13,5 +13,5 @@ public interface RepositorioCaptacion extends RepositorioGenerico<EntidadCaptaci
 
     //@Query(value = "FROM #{#entityName} c WHERE c.asociadoEntity.idAsociado = :idAsociado")
     @Query(value = "SELECT * FROM captacion c WHERE c.asocid = :idAsociado ORDER BY tipcapid, captnumerocuenta", nativeQuery = true)
-    List<EntidadCaptacion> findAllByIdAsociado(@Param("idAsociado") Integer idAsociado);
+    List<EntidadCaptacion> findAllByIdAsociado(@Param("idAsociado") Integer idAsociado) throws Exception;
 }

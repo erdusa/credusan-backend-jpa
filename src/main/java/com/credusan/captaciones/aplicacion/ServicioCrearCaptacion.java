@@ -37,7 +37,7 @@ public class ServicioCrearCaptacion {
         return repo.save(captacion);
     }
 
-    private boolean verificarSiEsAportesYAsociadoYaTieneUnaActiva(Captacion captacion) {
+    private boolean verificarSiEsAportesYAsociadoYaTieneUnaActiva(Captacion captacion) throws Exception {
         boolean captacionACrearEsAportes = captacion.getTipoCaptacion().getIdTipoCaptacion().equals(EnumTipoCaptacion.APORTES.id);
 
         boolean tieneCaptacionAportesActiva = repo.getCuentaAportes(captacion.getAsociado().getIdAsociado()) != null;

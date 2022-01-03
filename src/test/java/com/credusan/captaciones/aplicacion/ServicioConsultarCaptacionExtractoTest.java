@@ -21,7 +21,8 @@ import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestConfig
 class ServicioConsultarCaptacionExtractoTest {
@@ -63,8 +64,8 @@ class ServicioConsultarCaptacionExtractoTest {
         captacionExtracto = new CaptacionExtracto(
                 LocalDate.now(),
                 LocalTime.now(),
-                (double)200000,
-                (double)0
+                (double) 200000,
+                (double) 0
         );
 
         captacionExtracto.setCaptacion(captacionCreada);
@@ -74,7 +75,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void deberiaRetornarUnRegistroSinFiltrarFechas() throws Exception {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(captacionCreada.getIdCaptacion());
 
@@ -85,7 +86,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void deberiaRetornarUnRegistroConFiltroDeFechaInicial() throws Exception {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(captacionCreada.getIdCaptacion());
 
@@ -101,7 +102,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void deberiaRetornarUnRegistroConFiltroDeFechaFinal() throws Exception {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(captacionCreada.getIdCaptacion());
 
@@ -117,7 +118,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void deberiaRetornarUnRegistroConFiltroDeFechaInicialYFinal() throws Exception {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(captacionCreada.getIdCaptacion());
 
@@ -145,7 +146,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void noDeberiaRetornarRegistrosConFechaInicialFutura() throws Exception {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(captacionCreada.getIdCaptacion());
 
@@ -158,7 +159,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void noDeberiaRetornarRegistrosConFechaFinalMenorAActual() throws Exception {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(captacionCreada.getIdCaptacion());
 
@@ -171,7 +172,7 @@ class ServicioConsultarCaptacionExtractoTest {
     @Test
     void deberiaRetornarErrorSiIdCaptacionEsNulo() {
 
-        Pageable page = PageRequest.of(0,10);
+        Pageable page = PageRequest.of(0, 10);
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(null);
         Exception thrown = assertThrows(Exception.class, () -> servicioConsultarCaptacionExtracto.getAllByIdCaptacionAndFechas(page, extractoDTO));

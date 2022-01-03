@@ -3,7 +3,6 @@ package com.credusan.captaciones.aplicacion;
 import com.credusan.captaciones.dominio.modelos.TipoCaptacion;
 import com.credusan.captaciones.dominio.puertos.PersistenciaTipoCaptacion;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 

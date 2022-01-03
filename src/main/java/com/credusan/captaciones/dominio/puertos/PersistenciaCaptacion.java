@@ -1,5 +1,6 @@
 package com.credusan.captaciones.dominio.puertos;
 
+import com.credusan.asociados.dominio.modelos.Asociado;
 import com.credusan.captaciones.dominio.modelos.Captacion;
 
 import java.util.List;
@@ -8,11 +9,14 @@ public interface PersistenciaCaptacion {
 
     Captacion save(Captacion captacion) throws Exception;
 
+    Captacion crearCuentaAportes(Asociado asociado) throws Exception;
+
     Integer getMaxNumeroCuentaByTipoCaptacion(Integer IdTipoCaptacion);
 
-    List<Captacion> getAllByIdAsociado(Integer idAsociado);
+    List<Captacion> getAllByIdAsociado(Integer idAsociado) throws Exception;
 
     Captacion getById(Integer idCaptacion);
 
-    Captacion getCuentaAportes(Integer idAsociado);
+    Captacion getCuentaAportes(Integer idAsociado) throws Exception;
+
 }
