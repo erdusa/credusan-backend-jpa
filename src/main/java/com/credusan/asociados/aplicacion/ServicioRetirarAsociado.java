@@ -25,7 +25,7 @@ public class ServicioRetirarAsociado {
     public Boolean retirarAsociado(int idAsociado) throws Exception {
 
         Asociado asociado = persistenciaAsociado.getById(idAsociado);
-        if (!asociado.isActivo()) {
+        if (!asociado.getActivo()) {
             throw new Exception(EL_ASOCIADO_NO_ESTA_ACTIVO);
         }
 
@@ -41,7 +41,7 @@ public class ServicioRetirarAsociado {
 
         Captacion captacionSaldada = captacionPersistence.save(cuentaAportes);
 
-        return !asociadoRetirado.isActivo();
+        return !asociadoRetirado.getActivo();
     }
 
 
