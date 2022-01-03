@@ -21,7 +21,7 @@ public class PersistenciaCaptacionJPA implements PersistenciaCaptacion {
     }
 
     @Override
-    public Captacion save(Captacion captacion) {
+    public Captacion save(Captacion captacion) throws Exception {
         return repo.save(new EntidadCaptacion(captacion)).toCaptacion();
     }
 

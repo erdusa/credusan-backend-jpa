@@ -22,12 +22,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @TestConfig
 class ServicioActualizarAsociadoTest {
 
+    private static final String LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100 = "Los porcentajes asignados a los beneficiarios deben sumar 100";
+    private static final String NO_EXISTE_EL_ASOCIADO = "No existe el asociado";
+    private static final String NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO = "No puede inactivar el asociado, debería retirarlo";
+
     @Autowired
     ServicioCrearAsociado servicioCrearAsociado;
     @Autowired
     ServicioActualizarAsociado servicioActualizarAsociado;
 
-    Asociado asociado;
+    Asociado asociado, asociadoCreado;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -41,17 +45,17 @@ class ServicioActualizarAsociadoTest {
                 "pascasio",
                 "perez",
                 LocalDate.of(2000, 10, 5));
+
+        asociado.setBeneficiarios(new ArrayList<>());
+        asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 100));
+
+        asociadoCreado = servicioCrearAsociado.create(asociado);
     }
 
     @Test
     public void deberiaActualizarAsociadoSiPorcentajeBeneficiariosIgualA100() throws Exception {
-        asociado.setBeneficiarios(new ArrayList<>());
-        asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 100));
 
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-
-        Asociado asociadoU = new Asociado();
-        asociadoU.setIdAsociado(asociadoCreado.getIdAsociado());
+        Asociado asociadoU = asociadoCreado;
         asociadoU.setTipoDocumento(new TipoDocumento(2));
         asociadoU.setNumeroDocumento("202021");
         asociadoU.setNombres("pedro luis");
@@ -67,8 +71,7 @@ class ServicioActualizarAsociadoTest {
     }
 
     @Test
-    public void noDeberiaActualizarAsociadoSiPorcentajeBeneficiariosDiferenteDe100() throws Exception {
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
+    public void noDeberiaActualizarAsociadoSiPorcentajeBeneficiariosDiferenteDe100() {
 
         Asociado asociadoU = new Asociado();
         BeanUtils.copyProperties(asociadoCreado, asociadoU);
@@ -78,52 +81,52 @@ class ServicioActualizarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarAsociado.update(asociadoU.getIdAsociado(), asociadoU));
 
-        assertEquals("Los porcentajes asignados a los beneficiarios deben sumar 100", thrown.getMessage());
+        assertEquals(LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100, thrown.getMessage());
 
     }
 
     @Test
     public void noDeberiaActualizarAsociadoSiNoExiste() {
-        asociado.setIdAsociado(1);
+        asociado.setIdAsociado(0);
+
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarAsociado.update(asociado.getIdAsociado(), asociado));
 
-        assertEquals("No existe el asociado con id = " + asociado.getIdAsociado(), thrown.getMessage());
+        assertEquals(NO_EXISTE_EL_ASOCIADO, thrown.getMessage());
+    }
+
+    @Test
+    public void noDeberiaActualizarAsociadoSiIntentaInactivarlo() {
+        asociadoCreado.setActivo(false);
+
+        Exception thrown = assertThrows(Exception.class, () -> servicioActualizarAsociado.update(asociadoCreado.getIdAsociado(), asociadoCreado));
+
+        assertEquals(NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO, thrown.getMessage());
     }
 
     @Test
     public void deberiaActualizarDeTenerANoTenerBeneficiarios() throws Exception {
-        asociado.setBeneficiarios(new ArrayList<>());
-        asociado.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 100));
 
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
+        asociadoCreado.setBeneficiarios(null);
 
-        Asociado asociadoU = new Asociado();
-        asociadoU.setIdAsociado(asociadoCreado.getIdAsociado());
-        asociadoU.setTipoDocumento(new TipoDocumento(2));
-        asociadoU.setNumeroDocumento("202021");
-        asociadoU.setNombres("pedro luis");
-        asociadoU.setPrimerApellido("juliano");
-        asociadoU.setSegundoApellido("marciano");
-        asociadoU.setFechaNacimiento(LocalDate.of(1900, 10, 5));
-
-        Asociado asociadoActual = servicioActualizarAsociado.update(asociadoU.getIdAsociado(), asociadoU);
-        assertEquals(asociadoU.toString(), asociadoActual.toString());
+        Asociado asociadoActual = servicioActualizarAsociado.update(asociadoCreado.getIdAsociado(), asociadoCreado);
+        assertEquals(asociadoCreado.toString(), asociadoActual.toString());
         assertEquals(0, asociadoActual.getBeneficiarios().size());
     }
 
     @Test
     public void deberiaActualizarDeNoTenerATenerBeneficiarios() throws Exception {
 
-        Asociado asociadoCreado = servicioCrearAsociado.create(asociado);
-
         Asociado asociadoU = new Asociado();
-        asociadoU.setIdAsociado(asociadoCreado.getIdAsociado());
         asociadoU.setTipoDocumento(new TipoDocumento(2));
         asociadoU.setNumeroDocumento("202021");
         asociadoU.setNombres("pedro luis");
         asociadoU.setPrimerApellido("juliano");
         asociadoU.setSegundoApellido("marciano");
         asociadoU.setFechaNacimiento(LocalDate.of(1900, 10, 5));
+
+        asociadoCreado = servicioCrearAsociado.create(asociadoU);
+
+        asociadoU.setIdAsociado(asociadoCreado.getIdAsociado());
         asociadoU.setBeneficiarios(new ArrayList<>());
         asociadoU.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 50));
         asociadoU.getBeneficiarios().add(new Beneficiario("carlos", "perez", "diaz", 50));

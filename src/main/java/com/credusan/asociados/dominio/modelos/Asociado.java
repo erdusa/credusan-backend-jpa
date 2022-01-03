@@ -20,7 +20,7 @@ public class Asociado {
     private String segundoApellido;
     private LocalDate fechaNacimiento;
     private List<Beneficiario> beneficiarios;
-    private boolean activo;
+    private Boolean activo;
 
     public Asociado(TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String primerApellido, String segundoApellido, LocalDate fechaNacimiento) {
         this.tipoDocumento = tipoDocumento;
@@ -29,6 +29,7 @@ public class Asociado {
         setPrimerApellido(primerApellido);
         setSegundoApellido(segundoApellido);
         this.fechaNacimiento = fechaNacimiento;
+        this.activo = true;
     }
 
     public void setNombres(String nombres) {
@@ -64,6 +65,7 @@ public class Asociado {
                 ", primerApellido='" + primerApellido + '\'' +
                 ", segundoApellido='" + segundoApellido + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
+                ", activo=" + activo +
                 '}';
     }
 }

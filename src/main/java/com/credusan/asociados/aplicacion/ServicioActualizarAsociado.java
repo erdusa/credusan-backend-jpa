@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicioActualizarAsociado {
 
+    private static final String LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100 = "Los porcentajes asignados a los beneficiarios deben sumar 100";
+    private static final String NO_EXISTE_EL_ASOCIADO = "No existe el asociado";
+    private static final String NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO = "No puede inactivar el asociado, debería retirarlo";
+
     private final PersistenciaAsociado persistence;
 
     public ServicioActualizarAsociado(PersistenciaAsociado persistenciaAsociado) {
@@ -16,13 +20,19 @@ public class ServicioActualizarAsociado {
     }
 
     public Asociado update(Integer idAsociado, Asociado asociado) throws Exception {
+        Asociado asociadoU = persistence.getById(idAsociado);
 
-        if (persistence.getById(idAsociado).getNumeroDocumento() == null) {
-            throw new Exception("No existe el asociado con id = " + idAsociado);
+        if (asociadoU.getIdAsociado() == null) {
+            throw new Exception(NO_EXISTE_EL_ASOCIADO);
         }
 
         if (verificarSiElPorcentajeBeneficiariosEstaErrado(asociado)) {
-            throw new Exception("Los porcentajes asignados a los beneficiarios deben sumar 100");
+            throw new Exception(LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100);
+        }
+
+        boolean esInactivarAsociado = asociadoU.getActivo() && !asociado.getActivo();
+        if (esInactivarAsociado) {
+            throw new Exception(NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO);
         }
 
         if (asociado.getBeneficiarios() != null) {

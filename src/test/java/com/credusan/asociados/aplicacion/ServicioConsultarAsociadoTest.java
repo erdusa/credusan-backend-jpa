@@ -68,7 +68,7 @@ class ServicioConsultarAsociadoTest {
         Pageable page = PageRequest.of(0, 5);
 
         assertEquals(5, servicioConsultarAsociado.getAll(page, soloActivos).getTotalElements());
-        assertTrue(servicioConsultarAsociado.getAll(page, soloActivos).stream().allMatch(Asociado::isActivo));
+        assertTrue(servicioConsultarAsociado.getAll(page, soloActivos).stream().allMatch(Asociado::getActivo));
     }
 
     //////// Test para getAllByNames
@@ -112,7 +112,7 @@ class ServicioConsultarAsociadoTest {
         assertEquals(1, servicioConsultarAsociado.getAllByNameOrSurnames("pedro pascasio").size());
         assertEquals(1, servicioConsultarAsociado.getAllByNameOrSurnames("maria rodriguez ascanio").size());
         assertEquals(1, servicioConsultarAsociado.getAllByNameOrSurnames("lucy maria ascanio").size());
-        assertTrue(servicioConsultarAsociado.getAllByNameOrSurnames("maria").stream().allMatch(Asociado::isActivo));
+        assertTrue(servicioConsultarAsociado.getAllByNameOrSurnames("maria").stream().allMatch(Asociado::getActivo));
     }
 
 }

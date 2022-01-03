@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PersistenciaCaptacion {
 
-    Captacion save(Captacion captacion);
+    Captacion save(Captacion captacion) throws Exception;
 
     Integer getMaxNumeroCuentaByTipoCaptacion(Integer IdTipoCaptacion);
 

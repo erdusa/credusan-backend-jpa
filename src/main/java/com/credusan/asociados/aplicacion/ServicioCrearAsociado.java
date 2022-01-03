@@ -48,7 +48,7 @@ public class ServicioCrearAsociado {
         return asociadoCreado;
     }
 
-    private void crearCaptacion(Asociado asociado) {
+    private void crearCaptacion(Asociado asociado) throws Exception {
         Captacion captacion = new Captacion();
         captacion.setTipoEstadoCaptacion(new TipoEstadoCaptacion(EnumTipoEstadoCaptacion.ACTIVA.id));
         captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.APORTES.id));
