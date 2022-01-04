@@ -27,8 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @TestConfig
 class ServicioConsultarCaptacionExtractoTest {
 
-    private static final String DEBE_ESPECIFICAR_EL_IDENTIFICADOR_DE_LA_CAPTACION = "Debe especificar el identificador de la captación";
-
     @Autowired
     ServicioCrearAsociado servicioCrearAsociado;
     @Autowired
@@ -176,7 +174,7 @@ class ServicioConsultarCaptacionExtractoTest {
         ConsultaCaptacionExtractoDTO extractoDTO = new ConsultaCaptacionExtractoDTO();
         extractoDTO.setIdCaptacion(null);
         Exception thrown = assertThrows(Exception.class, () -> servicioConsultarCaptacionExtracto.getAllByIdCaptacionAndFechas(page, extractoDTO));
-        assertEquals(DEBE_ESPECIFICAR_EL_IDENTIFICADOR_DE_LA_CAPTACION, thrown.getMessage());
+        assertEquals(ServicioConsultarCaptacionExtracto.DEBE_ESPECIFICAR_EL_IDENTIFICADOR_DE_LA_CAPTACION, thrown.getMessage());
 
     }
 }

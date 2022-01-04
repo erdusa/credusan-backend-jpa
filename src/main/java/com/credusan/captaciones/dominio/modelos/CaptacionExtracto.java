@@ -8,12 +8,12 @@ import java.time.LocalTime;
 @Data
 public class CaptacionExtracto {
 
-    private static final String LA_FECHA_NO_PUEDE_SER_SUPERIOR_A_LA_ACTUAL = "La fecha no puede ser superior a la actual";
-    private static final String LA_HORA_NO_PUEDE_SER_SUPERIOR_A_LA_ACTUAL = "La hora no puede ser superior a la actual";
-    private static final String EL_VALOR_DEBITO_NO_PUEDE_SER_MENOR_QUE_CERO = "El valor débito no puede ser menor que cero";
-    private static final String EL_VALOR_CREDITO_NO_PUEDE_SER_MENOR_QUE_CERO = "El valor crédito no puede ser menor que cero";
-    private static final String EL_VALOR_DEBITO_O_CREDITO_DEBE_SER_MAYOR_A_CERO = "El valor débito o crédito debe ser mayor que cero";
-    private static final String NO_PUEDE_ASIGNAR_VALOR_DEBITO_Y_CREDITO_AL_MISMO_TIEMPO = "No puede asignar valor débito y crédito al mismo tiempo";
+    static final String LA_FECHA_NO_PUEDE_SER_SUPERIOR_A_LA_ACTUAL = "La fecha no puede ser superior a la actual";
+    static final String LA_HORA_NO_PUEDE_SER_SUPERIOR_A_LA_ACTUAL = "La hora no puede ser superior a la actual";
+    static final String EL_VALOR_DEBITO_NO_PUEDE_SER_MENOR_QUE_CERO = "El valor débito no puede ser menor que cero";
+    static final String EL_VALOR_CREDITO_NO_PUEDE_SER_MENOR_QUE_CERO = "El valor crédito no puede ser menor que cero";
+    static final String EL_VALOR_DEBITO_O_CREDITO_DEBE_SER_MAYOR_A_CERO = "El valor débito o crédito debe ser mayor que cero";
+    static final String NO_PUEDE_ASIGNAR_VALOR_DEBITO_Y_CREDITO_AL_MISMO_TIEMPO = "No puede asignar valor débito y crédito al mismo tiempo";
 
     private Long idCaptacionExtracto;
     private Captacion captacion;

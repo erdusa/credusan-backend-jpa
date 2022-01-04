@@ -23,9 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestConfig
 class ServicioRetirarAsociadoTest {
-    private static final String NO_TIENE_CUENTA_DE_APORTES_ACTIVA = "No tiene cuenta de aportes activa";
-    private static final String EL_ASOCIADO_NO_ESTA_ACTIVO = "El asociado no está activo";
-    private static final String EL_ASOCIADO_TIENE_CAPTACIONES_ACTIVAS = "El asociado tiene captaciones activas";
 
     @Autowired
     ServicioCrearAsociado servicioCrearAsociado;
@@ -65,7 +62,7 @@ class ServicioRetirarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioRetirarAsociado.retirarAsociado(asociadoCreado.getIdAsociado()));
 
-        assertEquals(EL_ASOCIADO_NO_ESTA_ACTIVO, thrown.getMessage());
+        assertEquals(ServicioRetirarAsociado.EL_ASOCIADO_NO_ESTA_ACTIVO, thrown.getMessage());
     }
 
     @Test
@@ -82,7 +79,7 @@ class ServicioRetirarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioRetirarAsociado.retirarAsociado(asociadoCreado.getIdAsociado()));
 
-        assertEquals(EL_ASOCIADO_TIENE_CAPTACIONES_ACTIVAS, thrown.getMessage());
+        assertEquals(ServicioRetirarAsociado.EL_ASOCIADO_TIENE_CAPTACIONES_ACTIVAS, thrown.getMessage());
     }
 
 /*    @Test
@@ -91,6 +88,6 @@ class ServicioRetirarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioRetirarAsociado.retirarAsociado(asociadoCreado.getIdAsociado()));
 
-        assertEquals(NO_TIENE_CUENTA_DE_APORTES_ACTIVA, thrown.getMessage());
+        assertEquals(ServicioRetirarAsociado.NO_TIENE_CUENTA_DE_APORTES_ACTIVA, thrown.getMessage());
     }*/
 }

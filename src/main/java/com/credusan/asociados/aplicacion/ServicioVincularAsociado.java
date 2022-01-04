@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ServicioVincularAsociado {
 
-    private static final String EL_ASOCIADO_ESTA_ACTIVO = "El asociado está activo";
+    static final String EL_ASOCIADO_ESTA_ACTIVO = "El asociado está activo";
 
     private final PersistenciaAsociado persistence;
     private final PersistenciaCaptacion captacionPersistence;

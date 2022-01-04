@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicioSaldarCaptacion {
 
-    private static final String NO_SE_PUEDE_SALDAR_LA_CUENTA_DE_APORTES = "No se puede saldar la cuenta de aportes";
-    private static final String LA_CAPTACION_YA_ESTA_SALDADA = "La captación ya está saldada";
+    static final String NO_SE_PUEDE_SALDAR_LA_CUENTA_DE_APORTES = "No se puede saldar la cuenta de aportes";
+    static final String LA_CAPTACION_YA_ESTA_SALDADA = "La captación ya está saldada";
 
     private PersistenciaCaptacion repo;
 

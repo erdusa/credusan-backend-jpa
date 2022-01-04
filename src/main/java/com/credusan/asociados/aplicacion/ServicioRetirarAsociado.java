@@ -13,9 +13,9 @@ import java.util.List;
 
 @Service
 public class ServicioRetirarAsociado {
-    private static final String NO_TIENE_CUENTA_DE_APORTES_ACTIVA = "No tiene cuenta de aportes activa";
-    private static final String EL_ASOCIADO_NO_ESTA_ACTIVO = "El asociado no está activo";
-    private static final String EL_ASOCIADO_TIENE_CAPTACIONES_ACTIVAS = "El asociado tiene captaciones activas";
+    static final String NO_TIENE_CUENTA_DE_APORTES_ACTIVA = "No tiene cuenta de aportes activa";
+    static final String EL_ASOCIADO_NO_ESTA_ACTIVO = "El asociado no está activo";
+    static final String EL_ASOCIADO_TIENE_CAPTACIONES_ACTIVAS = "El asociado tiene captaciones activas";
 
     private final PersistenciaAsociado persistenciaAsociado;
     private final PersistenciaCaptacion captacionPersistence;

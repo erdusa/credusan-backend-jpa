@@ -22,10 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @TestConfig
 class ServicioActualizarAsociadoTest {
 
-    private static final String LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100 = "Los porcentajes asignados a los beneficiarios deben sumar 100";
-    private static final String NO_EXISTE_EL_ASOCIADO = "No existe el asociado";
-    private static final String NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO = "No puede inactivar el asociado, debería retirarlo";
-
     @Autowired
     ServicioCrearAsociado servicioCrearAsociado;
     @Autowired
@@ -81,7 +77,7 @@ class ServicioActualizarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarAsociado.update(asociadoU.getIdAsociado(), asociadoU));
 
-        assertEquals(LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100, thrown.getMessage());
+        assertEquals(ServicioActualizarAsociado.LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100, thrown.getMessage());
 
     }
 
@@ -91,7 +87,7 @@ class ServicioActualizarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarAsociado.update(asociado.getIdAsociado(), asociado));
 
-        assertEquals(NO_EXISTE_EL_ASOCIADO, thrown.getMessage());
+        assertEquals(ServicioActualizarAsociado.NO_EXISTE_EL_ASOCIADO, thrown.getMessage());
     }
 
     @Test
@@ -100,7 +96,7 @@ class ServicioActualizarAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioActualizarAsociado.update(asociadoCreado.getIdAsociado(), asociadoCreado));
 
-        assertEquals(NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO, thrown.getMessage());
+        assertEquals(ServicioActualizarAsociado.NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO, thrown.getMessage());
     }
 
     @Test

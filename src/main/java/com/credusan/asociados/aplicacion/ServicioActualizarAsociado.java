@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicioActualizarAsociado {
 
-    private static final String LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100 = "Los porcentajes asignados a los beneficiarios deben sumar 100";
-    private static final String NO_EXISTE_EL_ASOCIADO = "No existe el asociado";
-    private static final String NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO = "No puede inactivar el asociado, debería retirarlo";
+    static final String LOS_PORCENTAJES_ASIGNADOS_A_LOS_BENEFICIARIOS_DEBEN_SUMAR_100 = "Los porcentajes asignados a los beneficiarios deben sumar 100";
+    static final String NO_EXISTE_EL_ASOCIADO = "No existe el asociado";
+    static final String NO_PUEDE_INACTIVAR_EL_ASOCIADO_DEBERIA_RETIRARLO = "No puede inactivar el asociado, debería retirarlo";
 
     private final PersistenciaAsociado persistence;
 

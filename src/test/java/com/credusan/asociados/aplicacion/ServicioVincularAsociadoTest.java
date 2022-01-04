@@ -17,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestConfig
 class ServicioVincularAsociadoTest {
-    private static final String TIENE_CUENTA_DE_APORTES_ACTIVA = "No tiene cuenta de aportes activa";
-    private static final String EL_ASOCIADO_ESTA_ACTIVO = "El asociado no está activo";
 
     @Autowired
     ServicioCrearAsociado servicioCrearAsociado;
@@ -57,6 +55,6 @@ class ServicioVincularAsociadoTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioRetirarAsociado.retirarAsociado(asociadoCreado.getIdAsociado()));
 
-        assertEquals(EL_ASOCIADO_ESTA_ACTIVO, thrown.getMessage());
+        assertEquals(ServicioVincularAsociado.EL_ASOCIADO_ESTA_ACTIVO, thrown.getMessage());
     }
 }

@@ -23,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestConfig
 class ServicioSaldarCaptacionTest {
-    private static final String NO_SE_PUEDE_SALDAR_LA_CUENTA_DE_APORTES = "No se puede saldar la cuenta de aportes";
-    private static final String LA_CAPTACION_YA_ESTA_SALDADA = "La captación ya está saldada";
 
     @Autowired
     ServicioCrearAsociado servicioCrearAsociado;
@@ -82,7 +80,7 @@ class ServicioSaldarCaptacionTest {
 
         Exception thrown = assertThrows(Exception.class, () -> servicioSaldarCaptacion.saldar(captacionAportes.getIdCaptacion()));
 
-        assertEquals(NO_SE_PUEDE_SALDAR_LA_CUENTA_DE_APORTES, thrown.getMessage());
+        assertEquals(ServicioSaldarCaptacion.NO_SE_PUEDE_SALDAR_LA_CUENTA_DE_APORTES, thrown.getMessage());
     }
 
     @Test
@@ -92,7 +90,7 @@ class ServicioSaldarCaptacionTest {
         captacion.setTipoCaptacion(new TipoCaptacion(EnumTipoCaptacion.APORTES.id));
         Exception thrown = assertThrows(Exception.class, () -> servicioSaldarCaptacion.saldar(captacionAhorros.getIdCaptacion()));
 
-        assertEquals(LA_CAPTACION_YA_ESTA_SALDADA, thrown.getMessage());
+        assertEquals(ServicioSaldarCaptacion.LA_CAPTACION_YA_ESTA_SALDADA, thrown.getMessage());
     }
 
 }

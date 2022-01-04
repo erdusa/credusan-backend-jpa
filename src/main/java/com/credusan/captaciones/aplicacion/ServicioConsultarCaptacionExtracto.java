@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServicioConsultarCaptacionExtracto {
-    private static final String DEBE_ESPECIFICAR_EL_IDENTIFICADOR_DE_LA_CAPTACION = "Debe especificar el identificador de la captación";
+    static final String DEBE_ESPECIFICAR_EL_IDENTIFICADOR_DE_LA_CAPTACION = "Debe especificar el identificador de la captación";
 
     private PersistenciaCaptacionExtracto repo;
 
