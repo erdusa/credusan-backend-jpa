@@ -39,7 +39,6 @@ public class EntidadAsociado {
     @Column(name = "asocactivo", nullable = false)
     private Boolean activo;
     @OneToMany(mappedBy = "entidadAsociado", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
-    @ToString.Exclude
     private List<EntidadBeneficiario> beneficiarioEntities;
 
     public EntidadAsociado() {

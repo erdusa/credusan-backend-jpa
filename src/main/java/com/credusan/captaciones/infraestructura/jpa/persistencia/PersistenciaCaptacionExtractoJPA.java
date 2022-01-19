@@ -7,9 +7,14 @@ import com.credusan.captaciones.infraestructura.jpa.daos.RepositorioCaptacionExt
 import com.credusan.captaciones.infraestructura.jpa.entidades.EntidadCaptacionExtracto;
 import com.credusan.captaciones.infraestructura.jpa.especificaciones.CaptacionExtractoEspec;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PersistenciaCaptacionExtractoJPA implements PersistenciaCaptacionExtracto {
@@ -37,7 +42,20 @@ public class PersistenciaCaptacionExtractoJPA implements PersistenciaCaptacionEx
             spec = spec.and(CaptacionExtractoEspec.esFechaMenorOIgualQue(extractoDTO.getFechaFinal()));
         }
 
-        return repo.findAll(spec, pageable).map(EntidadCaptacionExtracto::toCaptacionExtracto);
+        List<CaptacionExtracto> listaOriginal = repo.findAll(spec)
+                .stream()
+                .map(EntidadCaptacionExtracto::toCaptacionExtracto)
+                .collect(Collectors.toList());
+
+        List<CaptacionExtracto> listaRetorno = listaOriginal.stream()
+                .sorted(Comparator.comparing(CaptacionExtracto::getFecha)
+                        .thenComparing(CaptacionExtracto::getHora)
+                        .reversed())
+                .skip((long) pageable.getPageSize() * pageable.getPageNumber())
+                .limit(pageable.getPageSize())
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(listaRetorno, pageable, listaOriginal.size());
     }
 
 }

@@ -20,7 +20,8 @@ public class EntidadBeneficiario {
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "beneid")
     private Integer idBeneficiario;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     @JoinColumn(name = "asocid", nullable = false, foreignKey = @ForeignKey(name = "fk_bene_asoc"))
     private EntidadAsociado entidadAsociado;
     @Column(name = "benenombres", nullable = false, length = 30)

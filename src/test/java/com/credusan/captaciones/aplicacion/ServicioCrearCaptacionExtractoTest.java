@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestConfig
 class ServicioCrearCaptacionExtractoTest {
@@ -56,14 +57,64 @@ class ServicioCrearCaptacionExtractoTest {
                 (double) 200000,
                 (double) 0
         );
+
+        captacionExtracto.setCaptacion(captacionCreada);
     }
 
     @Test
-    void deberiaCrearCaptacionExtracto() {
+    void deberiaCrearCaptacionExtracto() throws Exception {
 
-        captacionExtracto.setCaptacion(captacionCreada);
         CaptacionExtracto captacionExtractoCreado = servicioCrearCaptacionExtracto.create(captacionExtracto);
 
         assertEquals(captacionExtracto.toString(), captacionExtractoCreado.toString());
+    }
+
+    @Test
+    void noDeberiaCrearCaptacionExtractoSiValorDebitoEsNegativo() {
+
+        captacionExtracto.setValorDebito(-200000D);
+        Exception thrown = assertThrows(Exception.class, () -> servicioCrearCaptacionExtracto.create(captacionExtracto));
+
+        assertEquals(ServicioCrearCaptacionExtracto.EL_VALOR_DEBITO_NO_PUEDE_SER_MENOR_QUE_CERO, thrown.getMessage());
+    }
+
+    @Test
+    void noDeberiaCrearCaptacionExtractoSiValorCreditoEsNegativo() {
+
+        captacionExtracto.setValorCredito(-200000D);
+        Exception thrown = assertThrows(Exception.class, () -> servicioCrearCaptacionExtracto.create(captacionExtracto));
+
+        assertEquals(ServicioCrearCaptacionExtracto.EL_VALOR_CREDITO_NO_PUEDE_SER_MENOR_QUE_CERO, thrown.getMessage());
+    }
+
+    @Test
+    void noDeberiaCrearCaptacionExtractoSiDebitoYCreditoSonCero() {
+
+        captacionExtracto.setValorDebito(0D);
+        captacionExtracto.setValorCredito(0D);
+        Exception thrown = assertThrows(Exception.class, () -> servicioCrearCaptacionExtracto.create(captacionExtracto));
+
+
+        assertEquals(ServicioCrearCaptacionExtracto.EL_VALOR_DEBITO_O_CREDITO_DEBE_SER_MAYOR_A_CERO, thrown.getMessage());
+    }
+
+    @Test
+    void noDeberiaCrearCaptacionExtractoSiDebitoYCreditoTienenValor() {
+
+        captacionExtracto.setValorDebito(100D);
+        captacionExtracto.setValorCredito(100D);
+        Exception thrown = assertThrows(Exception.class, () -> servicioCrearCaptacionExtracto.create(captacionExtracto));
+
+        assertEquals(ServicioCrearCaptacionExtracto.NO_PUEDE_ASIGNAR_VALOR_DEBITO_Y_CREDITO_AL_MISMO_TIEMPO, thrown.getMessage());
+    }
+
+    @Test
+    void noDeberiaCrearCaptacionExtractoSiSaldoQuedaNegativo() {
+
+        captacionExtracto.setValorDebito(0D);
+        captacionExtracto.setValorCredito(captacionCreada.getSaldo() + 1);
+        Exception thrown = assertThrows(Exception.class, () -> servicioCrearCaptacionExtracto.create(captacionExtracto));
+
+        assertEquals(ServicioCrearCaptacionExtracto.EL_SALDO_NO_PUEDE_QUEDAR_NEGATIVO, thrown.getMessage());
     }
 }

@@ -51,9 +51,10 @@ class ServicioVincularAsociadoTest {
     }
 
     @Test
-    public void noDeberiaVincularAsociadoSiEstaActivo() {
+    public void noDeberiaVincularAsociadoSiEstaActivo() throws Exception {
+        servicioVincularAsociado.vincular(asociadoCreado.getIdAsociado());
 
-        Exception thrown = assertThrows(Exception.class, () -> servicioRetirarAsociado.retirarAsociado(asociadoCreado.getIdAsociado()));
+        Exception thrown = assertThrows(Exception.class, () -> servicioVincularAsociado.vincular(asociadoCreado.getIdAsociado()));
 
         assertEquals(ServicioVincularAsociado.EL_ASOCIADO_ESTA_ACTIVO, thrown.getMessage());
     }

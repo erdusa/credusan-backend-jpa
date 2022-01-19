@@ -8,14 +8,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
 
 @RestController
 @RequestMapping("/extractocaptacion")
 public class ControladorConsultarCaptacionExtracto {
-
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     ServicioConsultarCaptacionExtracto servicio;
 
     public ControladorConsultarCaptacionExtracto(ServicioConsultarCaptacionExtracto servicio) {
@@ -23,8 +24,7 @@ public class ControladorConsultarCaptacionExtracto {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CaptacionExtracto>> getAllByIdCaptacionAndFechas(Pageable pageable, @RequestBody ConsultaCaptacionExtractoDTO extractoDTO) throws Exception {
-        Page<CaptacionExtracto> lista = servicio.getAllByIdCaptacionAndFechas(pageable, extractoDTO);
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+    public ResponseEntity<Page<CaptacionExtracto>> getAllByIdCaptacionAndFechas(Pageable pageable, ConsultaCaptacionExtractoDTO extractoDTO) throws Exception {
+        return new ResponseEntity<>(servicio.getAllByIdCaptacionAndFechas(pageable, extractoDTO), HttpStatus.OK);
     }
 }

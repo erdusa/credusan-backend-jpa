@@ -20,7 +20,7 @@ public class ControladorCrearCaptacionExtracto {
     }
 
     @PostMapping
-    public ResponseEntity<CaptacionExtracto> create(@RequestBody CaptacionExtracto captacionExtracto) {
+    public ResponseEntity<CaptacionExtracto> create(@RequestBody CaptacionExtracto captacionExtracto) throws Exception {
         CaptacionExtracto captacionExtractoResponse = servicio.create(captacionExtracto);
         return new ResponseEntity<>(captacionExtractoResponse, HttpStatus.CREATED);
     }
