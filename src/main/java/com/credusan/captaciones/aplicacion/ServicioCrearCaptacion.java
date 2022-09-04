@@ -34,7 +34,7 @@ public class ServicioCrearCaptacion {
         captacion.setNumeroCuenta(numeroCuenta);
         captacion.setSaldo((double) 0);
 
-        return repo.save(captacion);
+        return repo.insert(captacion);
     }
 
     private boolean verificarSiEsAportesYAsociadoYaTieneUnaActiva(Captacion captacion) throws Exception {

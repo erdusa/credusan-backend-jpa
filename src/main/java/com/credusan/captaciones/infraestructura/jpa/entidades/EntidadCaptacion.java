@@ -26,7 +26,7 @@ import java.time.LocalDate;
         })
 public class EntidadCaptacion {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "captid")
     private Integer idCaptacion;
     @ManyToOne(optional = false)

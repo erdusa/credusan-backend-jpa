@@ -9,13 +9,12 @@ import com.credusan.captaciones.dominio.modelos.TipoEstadoCaptacion;
 import com.credusan.captaciones.dominio.puertos.PersistenciaCaptacion;
 import com.credusan.captaciones.infraestructura.jpa.daos.RepositorioCaptacion;
 import com.credusan.captaciones.infraestructura.jpa.entidades.EntidadCaptacion;
-import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+//@Repository
 public class PersistenciaCaptacionJPA implements PersistenciaCaptacion {
 
     private RepositorioCaptacion repo;
@@ -25,7 +24,12 @@ public class PersistenciaCaptacionJPA implements PersistenciaCaptacion {
     }
 
     @Override
-    public Captacion save(Captacion captacion) throws Exception {
+    public Captacion insert(Captacion captacion) throws Exception {
+        return repo.save(new EntidadCaptacion(captacion)).toCaptacion();
+    }
+
+    @Override
+    public Captacion update(Captacion captacion) throws Exception {
         return repo.save(new EntidadCaptacion(captacion)).toCaptacion();
     }
 

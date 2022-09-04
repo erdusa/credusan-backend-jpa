@@ -66,6 +66,6 @@ public class ServicioCrearCaptacionExtracto {
         if (captacion.getSaldo() < 0) {
             throw new Exception(EL_SALDO_NO_PUEDE_QUEDAR_NEGATIVO);
         }
-        return persistenciaCaptacion.save(captacion);
+        return persistenciaCaptacion.update(captacion);
     }
 }

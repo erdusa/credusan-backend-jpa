@@ -4,12 +4,11 @@ import com.credusan.captaciones.dominio.modelos.TipoCaptacion;
 import com.credusan.captaciones.dominio.puertos.PersistenciaTipoCaptacion;
 import com.credusan.captaciones.infraestructura.jpa.daos.RepositorioTipoCaptacion;
 import com.credusan.captaciones.infraestructura.jpa.entidades.EntidadTipoCaptacion;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+//@Repository
 public class PersistenciaTipoCaptacionJPA implements PersistenciaTipoCaptacion {
 
     RepositorioTipoCaptacion repo;
